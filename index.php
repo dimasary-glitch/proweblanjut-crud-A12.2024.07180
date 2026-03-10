@@ -29,6 +29,7 @@ if(!isset($_SESSION['id'])){
     <th>Nama Barang</th>
     <th>Jumlah</th>
     <th>Kondisi</th>
+    <th>Tanggal Input</th>
     <th>Aksi</th>
 </tr>
 
@@ -46,9 +47,21 @@ while($d = $stmt->fetch(PDO::FETCH_ASSOC)){
     <td><?= $d['nama_barang']; ?></td>
     <td><?= $d['jumlah']; ?></td>
     <td><?= $d['kondisi']; ?></td>
-    <td>
+
+    <td class="tanggal">
+<?php
+if($d['tanggal_input'] != NULL){
+    echo date('d-m-Y', strtotime($d['tanggal_input']));
+}else{
+    echo "-";
+}
+?>
+</td>
+
+    <td class="aksi">
         <a href="edit.php?id=<?= $d['id']; ?>" class="edit">Edit</a>
         <a href="hapus.php?id=<?= $d['id']; ?>" class="hapus">Hapus</a>
+    </td>
     </a>
     </td>
 </tr>

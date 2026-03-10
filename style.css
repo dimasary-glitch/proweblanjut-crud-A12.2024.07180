@@ -44,11 +44,13 @@ th, td {
     text-align: center;
 }
 
+/*HEADER TABLE*/
 th {
     background: #0d6efd;
     color: white;
     font-weight: 600;
 }
+/*ROW STYLE*/
 
 tr:nth-child(even) {
     background: #f2f6fc;
@@ -56,6 +58,18 @@ tr:nth-child(even) {
 
 tr:hover {
     background: #e9f2ff;
+}
+
+/* KOLOM TANGGAL */
+td.tanggal {
+    font-size: 14px;
+    color: #444;
+    font-weight: 500;
+}
+
+/*KOLOM AKSI*/
+td.aksi {
+    white-space: nowrap;
 }
 
 /*BUTTONS*/
@@ -75,17 +89,20 @@ tr:hover {
     background: #084298;
 }
 
+/*EDIT BUTTON*/
 .edit {
     background: #ffc107;
     color: #000;
     padding: 6px 10px;
     border-radius: 6px;
     text-decoration: none;
+    margin-right: 5px;
 }
 
 .edit:hover {
     background: #e0a800;
 }
+/*DELETE BUTTON*/
 
 .hapus {
     background: #dc3545;
@@ -98,6 +115,7 @@ tr:hover {
 .hapus:hover {
     background: #bb2d3b;
 }
+/*LOGOUT BUTTON*/
 
 .logout {
     background: #6c757d;
@@ -166,6 +184,10 @@ input:focus, select:focus {
 
     table {
         font-size: 13px;
+    }
+
+    th, td {
+        padding: 8px;
     }
 
     .card {
