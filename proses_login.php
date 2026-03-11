@@ -35,6 +35,6 @@ if($user){
 
     header("location:index.php");
 }else{
-    echo "<script>alert('Login gagal'); window.location='login.php';</script>";
+    echo "<script>alert('Login gagal, coba lagi'); window.location='login.php';</script>";
 }
 ?>

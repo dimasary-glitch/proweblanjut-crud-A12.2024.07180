@@ -17,7 +17,7 @@ if(!isset($_SESSION['id'])){
 <a href="logout.php" class="hapus">Logout</a>
 
 <div class="card">
-    <!-- isi tabel dan tombol di sini -->
+
 <h2>Data Inventaris Laundry</h2>
 <a href="tambah.php" class="btn">+ Tambah Barang</a>
 </div>
@@ -60,7 +60,11 @@ if($d['tanggal_input'] != NULL){
 
     <td class="aksi">
         <a href="edit.php?id=<?= $d['id']; ?>" class="edit">Edit</a>
-        <a href="hapus.php?id=<?= $d['id']; ?>" class="hapus">Hapus</a>
+        <a href="hapus.php?id=<?= $d['id']; ?>" 
+   class="hapus"
+   onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+   Hapus
+</a>
     </td>
     </a>
     </td>
