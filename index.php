@@ -1,76 +1,136 @@
 <?php
+session_start();
 include 'koneksi.php';
 
 if(!isset($_SESSION['id'])){
     header("location:login.php");
+    exit;
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Inventaris Laundry</title>
-    <link rel="stylesheet" href="style.css">
+<title>Inventaris Laundry</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
-<body>
 
-<h3>Selamat Datang, <?= $_SESSION['nama']; ?> (<?= $_SESSION['role']; ?>)</h3>
-<a href="logout.php" class="hapus">Logout</a>
+<body class="bg-light">
 
-<div class="card">
 
-<h2>Data Inventaris Laundry</h2>
-<a href="tambah.php" class="btn">+ Tambah Barang</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<div class="container">
+
+<span class="navbar-brand">Sistem Inventaris Laundry</span>
+
+<div class="d-flex">
+
+<span class="text-white me-3">
+Selamat Datang, <?= $_SESSION['nama']; ?> (<?= $_SESSION['role']; ?>)
+</span>
+
+<a href="logout.php"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Apakah Anda yakin ingin logout?');">
+Logout
+</a>
+
 </div>
 
+</div>
+</nav>
 
-<table>
+<div class="container mt-4">
+
+
+<div class="card shadow mb-4">
+
+<div class="card-body">
+
+<h4 class="card-title">Data Inventaris Laundry</h4>
+
+<a href="tambah.php" class="btn btn-success mb-3">
++ Tambah Barang
+</a>
+
+<div class="table-responsive">
+
+<table class="table table-bordered table-striped table-hover">
+
+<thead class="table-primary">
+
 <tr>
-    <th>No</th>
-    <th>Nama Barang</th>
-    <th>Jumlah</th>
-    <th>Kondisi</th>
-    <th>Tanggal Input</th>
-    <th>Aksi</th>
+<th>No</th>
+<th>Nama Barang</th>
+<th>Jumlah</th>
+<th>Kondisi</th>
+<th>Tanggal Input</th>
+<th>Aksi</th>
 </tr>
+
+</thead>
+
+<tbody>
 
 <?php
 $no = 1;
-/*$data = mysqli_query($conn, "SELECT * FROM inventaris");
-while($d = mysqli_fetch_array($data)){*/
+
 $stmt = $conn->prepare("SELECT * FROM inventaris");
 $stmt->execute();
 
 while($d = $stmt->fetch(PDO::FETCH_ASSOC)){
 ?>
-<tr>
-    <td><?= $no++; ?></td>
-    <td><?= $d['nama_barang']; ?></td>
-    <td><?= $d['jumlah']; ?></td>
-    <td><?= $d['kondisi']; ?></td>
 
-    <td class="tanggal">
-<?php
-if($d['tanggal_input'] != NULL){
-    echo date('d-m-Y', strtotime($d['tanggal_input']));
-}else{
-    echo "-";
-}
-?>
+<tr>
+
+<td><?= $no++; ?></td>
+
+<td><?= $d['nama_barang']; ?></td>
+
+<td><?= $d['jumlah']; ?></td>
+
+<td><?= $d['kondisi']; ?></td>
+
+<td>
+<?= !empty($d['tanggal_input']) 
+? date('d-m-Y', strtotime($d['tanggal_input'])) 
+: '-'; ?>
 </td>
 
-    <td class="aksi">
-        <a href="edit.php?id=<?= $d['id']; ?>" class="edit">Edit</a>
-        <a href="hapus.php?id=<?= $d['id']; ?>" 
-   class="hapus"
-   onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-   Hapus
+<td>
+
+<a href="edit.php?id=<?= $d['id']; ?>" 
+class="btn btn-warning btn-sm">
+Edit
 </a>
-    </td>
-    </a>
-    </td>
+
+<a href="hapus.php?id=<?= $d['id']; ?>" 
+class="btn btn-danger btn-sm"
+onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+Hapus
+</a>
+
+</td>
+
 </tr>
+
 <?php } ?>
 
+</tbody>
+
 </table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
