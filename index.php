@@ -67,6 +67,7 @@ Logout
 <th>Jumlah</th>
 <th>Kondisi</th>
 <th>Tanggal Input</th>
+<th>Foto</th>
 <th>Aksi</th>
 </tr>
 
@@ -97,6 +98,16 @@ while($d = $stmt->fetch(PDO::FETCH_ASSOC)){
 <?= !empty($d['tanggal_input']) 
 ? date('d-m-Y', strtotime($d['tanggal_input'])) 
 : '-'; ?>
+</td>
+
+<td>
+<?php 
+if(!empty($d['foto']) && file_exists($d['foto'])){ 
+?>
+    <img src="<?= $d['foto']; ?>" width="80" class="img-thumbnail">
+<?php } else { ?>
+    <span class="text-muted">Tidak ada</span>
+<?php } ?>
 </td>
 
 <td>
